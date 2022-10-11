@@ -23,7 +23,7 @@ public class RecordSpot {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private UUID id; //ahahahahhaha
+    private UUID id;
 
     @ManyToOne
     private Vehicle vehicle;

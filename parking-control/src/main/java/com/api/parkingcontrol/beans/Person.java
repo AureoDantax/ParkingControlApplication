@@ -1,10 +1,7 @@
 package com.api.parkingcontrol.beans;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
@@ -27,8 +24,8 @@ public class Person {
     @Id
     @NotBlank(message = "Por favor, insira o CPF")
     @Column(nullable = false, unique = true, length = 14)
-    @org.hibernate.validator.constraints.br.CPF
-    private String CPF;
+    @org.hibernate.validator.constraints.br.CPF(message = "CPF inválido")
+    private String cpf;
 
     @NotBlank(message = "Por favor, insira o nome do proprietário do veiculo")
     @Column(nullable = false, unique = true, length = 130)
@@ -39,7 +36,7 @@ public class Person {
     private List<Vehicle> vehicle = new ArrayList<>();
 
 
-    @Email
+    @Email(message = "Formato de E-mail inválido")
     @NotBlank(message = "Por favor, insira o E-mail")
     @Column(nullable = false, unique = true, length = 200)
     private String email;
@@ -54,6 +51,8 @@ public class Person {
 
     @ManyToMany
     private List<ParkingSpot> parkingSpot = new ArrayList<>();
+
+
     @Column(name = "created_at", updatable = false)
     @Temporal(TemporalType.TIMESTAMP)
     @CreationTimestamp
@@ -65,4 +64,7 @@ public class Person {
     @UpdateTimestamp
     @JsonIgnore
     private Date updatedAt;
-}
+
+
+    }
+

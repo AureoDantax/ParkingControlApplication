@@ -1,14 +1,11 @@
 package com.api.parkingcontrol.controllers;
 
-import com.api.parkingcontrol.beans.ParkingSpot;
 import com.api.parkingcontrol.beans.Person;
-import com.api.parkingcontrol.beans.Vehicle;
 import com.api.parkingcontrol.services.PersonService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
 

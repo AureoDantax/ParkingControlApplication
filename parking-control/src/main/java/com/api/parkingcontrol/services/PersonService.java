@@ -1,12 +1,9 @@
 package com.api.parkingcontrol.services;
 
-import com.api.parkingcontrol.beans.ParkingSpot;
 import com.api.parkingcontrol.beans.Person;
 import com.api.parkingcontrol.repositories.SavePersonRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.util.ArrayList;
 
 @Service
 public class PersonService {

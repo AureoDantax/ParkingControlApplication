@@ -9,14 +9,12 @@ import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
-
 import javax.persistence.*;
-import javax.validation.constraints.NotBlank;
 import java.util.Date;
 import java.util.UUID;
 
 @Entity
-@Table(name="RECORD_SPOT")
+@Table(name = "RECORD_SPOT")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -27,8 +25,17 @@ public class RecordSpot {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
 
+    @ManyToOne
+    private Vehicle vehicle;
 
+    @ManyToOne
+    private ParkingSpot parkingSpot;
 
+    @Enumerated(EnumType.STRING)
+    private EventType event;
+
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date eventDate;
 
     @Column(name = "created_at", updatable = false)
     @Temporal(TemporalType.TIMESTAMP)
@@ -41,7 +48,6 @@ public class RecordSpot {
     @UpdateTimestamp
     @JsonIgnore
     private Date updatedAt;
-
 
 
 }

@@ -1,7 +1,8 @@
 package com.api.parkingcontrol.controllers;
 
-import com.api.parkingcontrol.beans.ParkingSpot;
-import com.api.parkingcontrol.services.ParkingSpotService;
+import com.api.parkingcontrol.beans.ParkingEventRequest;
+import com.api.parkingcontrol.repositories.RecordSpotRepository;
+import com.api.parkingcontrol.services.ParkingSpotRecordService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,29 +18,33 @@ import java.util.HashMap;
 import java.util.Map;
 
 @RestController
-@Validated
 @CrossOrigin(origins = "*", maxAge = 3600)
-@RequestMapping("/parking-spot")
-public class ParkingSpotController {
+@RequestMapping("/parking_spot")
+public class RecordSpotController {
 
     @Autowired
-    private ParkingSpotService parkingSpotService;
+    private ParkingSpotRecordService parkingSpotRecordService;
+    @Autowired
+    private RecordSpotRepository recordSpotRepository;
+
 
     @PostMapping("/save")
-    public ResponseEntity<Object> saveParkingSpot(@RequestBody @Valid ParkingSpot parkingSpot) {
+    public ResponseEntity<Object> saveParkingSpot(@Valid @RequestBody ParkingEventRequest parkingEventRequest) {
+// tratar aqui o evento
+       // P     event
 
-        parkingSpot.setRegistrationDate(LocalDateTime.now(ZoneId.of("UTC")));
+        parkingEventRequest.setRegistrationDate(LocalDateTime.now(ZoneId.of("UTC")));
         try {
-            return ResponseEntity.status(HttpStatus.CREATED).body(parkingSpotService.save(parkingSpot));
+            return ResponseEntity.status(HttpStatus.CREATED).body(parkingSpotRecordService);
         } catch (Exception ex) {
             return ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY).body("Alguns dados estão incorretos: " + ex.getMessage());
         }
+
     }
 
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(MethodArgumentNotValidException.class)
-    public Map<String, String> handleValidationExceptions(
-            MethodArgumentNotValidException ex) {
+    public Map<String, String> handleValidationExceptions(MethodArgumentNotValidException ex) {
         Map<String, String> errors = new HashMap<>();
         ex.getBindingResult().getAllErrors().forEach((error) -> {
             String fieldName = ((FieldError) error).getField();

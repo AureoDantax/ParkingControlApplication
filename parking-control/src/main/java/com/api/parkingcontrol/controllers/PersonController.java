@@ -23,7 +23,7 @@ public class PersonController {
     ResponseEntity<Object> createUser(@Valid @RequestBody Person person) {
         Person personModel = personService.createPerson(person);
         try {
-            return ResponseEntity.status(HttpStatus.CREATED).body(  personModel);
+            return ResponseEntity.status(HttpStatus.CREATED).body(personModel);
         } catch (Exception ex) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Alguns dados estão incorretos: " + ex.getMessage());
         }

@@ -10,6 +10,7 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.UUID;
 
@@ -34,8 +35,6 @@ public class RecordSpot {
     @Enumerated(EnumType.STRING)
     private EventType event;
 
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date eventDate;
 
     @Column(name = "created_at", updatable = false)
     @Temporal(TemporalType.TIMESTAMP)
@@ -49,5 +48,11 @@ public class RecordSpot {
     @JsonIgnore
     private Date updatedAt;
 
+    public void setRegistrationDate(LocalDateTime date) {
+
+    }
+
 
 }
+
+
